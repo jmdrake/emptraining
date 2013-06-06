@@ -1,0 +1,295 @@
+timestamp: 2013-05-17T17:56:22.117812
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username CHAR(512),
+    first_name CHAR(512),
+    last_name CHAR(512),
+    email CHAR(512),
+    password CHAR(512),
+    created_on TIMESTAMP,
+    modified_on TIMESTAMP,
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2013-05-17T17:56:22.315912
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2013-05-17T17:56:22.462793
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:22.607238
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group(id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2013-05-17T17:56:22.789040
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2013-05-17T17:56:22.967707
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2013-05-17T17:56:23.150578
+CREATE TABLE t_employee(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_name CHAR(512),
+    f_address CHAR(512),
+    f_phone CHAR(512),
+    f_email CHAR(512),
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:23.339468
+CREATE TABLE t_employee_archive(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_name CHAR(512),
+    f_address CHAR(512),
+    f_phone CHAR(512),
+    f_email CHAR(512),
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    current_record INTEGER REFERENCES t_employee(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:23.537572
+CREATE TABLE t_course(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_title_string CHAR(512),
+    f_description TEXT,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:23.694359
+CREATE TABLE t_course_archive(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_title_string CHAR(512),
+    f_description TEXT,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    current_record INTEGER REFERENCES t_course(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:23.850852
+CREATE TABLE t_session(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_course_id_reference INTEGER REFERENCES t_course(id) ON DELETE CASCADE,
+    f_date DATE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:24.007666
+CREATE TABLE t_session_archive(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_course_id_reference INTEGER REFERENCES t_course(id) ON DELETE CASCADE,
+    f_date DATE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    current_record INTEGER REFERENCES t_session(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:24.153154
+CREATE TABLE t_attendance(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_emp_id_reference INTEGER REFERENCES t_employee(id) ON DELETE CASCADE,
+    f_session_id_reference INTEGER REFERENCES t_session(id) ON DELETE CASCADE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:24.320916
+CREATE TABLE t_attendance_archive(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_emp_id_reference INTEGER REFERENCES t_employee(id) ON DELETE CASCADE,
+    f_session_id_reference INTEGER REFERENCES t_session(id) ON DELETE CASCADE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    current_record INTEGER REFERENCES t_attendance(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:24.488120
+CREATE TABLE t_certification(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_name_string CHAR(512),
+    f_description TEXT,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:24.668478
+CREATE TABLE t_certification_archive(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_name_string CHAR(512),
+    f_description TEXT,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    current_record INTEGER REFERENCES t_certification(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:24.892225
+CREATE TABLE t_empcert(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_emp_id_reference INTEGER REFERENCES t_employee(id) ON DELETE CASCADE,
+    f_cert_id_reference INTEGER REFERENCES t_certification(id) ON DELETE CASCADE,
+    f_expires DATE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:25.082463
+CREATE TABLE t_empcert_archive(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_emp_id_reference INTEGER REFERENCES t_employee(id) ON DELETE CASCADE,
+    f_cert_id_reference INTEGER REFERENCES t_certification(id) ON DELETE CASCADE,
+    f_expires DATE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    current_record INTEGER REFERENCES t_empcert(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:25.316112
+CREATE TABLE t_doctype(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_name_string CHAR(512),
+    f_description TEXT,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:25.461660
+CREATE TABLE t_doctype_archive(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_name_string CHAR(512),
+    f_description TEXT,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    current_record INTEGER REFERENCES t_doctype(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:25.616739
+CREATE TABLE t_certtype(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_name CHAR(512),
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:25.763695
+CREATE TABLE t_certtype_archive(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_name CHAR(512),
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    current_record INTEGER REFERENCES t_certtype(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:25.921092
+CREATE TABLE t_document(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_title_string CHAR(512),
+    f_description TEXT,
+    f_course_id_reference INTEGER REFERENCES t_course(id) ON DELETE CASCADE,
+    f_doctype_id_reference INTEGER REFERENCES t_doctype(id) ON DELETE CASCADE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T17:56:26.077471
+CREATE TABLE t_document_archive(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    f_title_string CHAR(512),
+    f_description TEXT,
+    f_course_id_reference INTEGER REFERENCES t_course(id) ON DELETE CASCADE,
+    f_doctype_id_reference INTEGER REFERENCES t_doctype(id) ON DELETE CASCADE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    current_record INTEGER REFERENCES t_document(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-05-17T18:15:04.249283
+ALTER TABLE t_document ADD f_document CHAR(512);
+timestamp: 2013-05-17T18:15:04.507510
+ALTER TABLE t_document_archive ADD f_document CHAR(512);

@@ -1,0 +1,253 @@
+(dp0
+S'table_session'
+p1
+(lp2
+S'course_id reference course'
+p3
+aS'date date'
+p4
+asS'table_employee'
+p5
+(lp6
+S'name'
+p7
+aS'address'
+p8
+aS'phone'
+p9
+aS'email'
+p10
+asS'table_certification'
+p11
+(lp12
+S'name string'
+p13
+aS'description text'
+p14
+asS'table_auth_user'
+p15
+(lp16
+S'username'
+p17
+aS'first_name'
+p18
+aS'last_name'
+p19
+aS'email'
+p20
+aS'password'
+p21
+asS'page_doctype_manage'
+p22
+S'## Manage doctype\r\n{{=form}}'
+p23
+sS'table_empcert'
+p24
+(lp25
+S'emp_id reference employee'
+p26
+aS'cert_id reference certification'
+p27
+aS'expires date'
+p28
+asS'tables'
+p29
+(lp30
+S'auth_user'
+p31
+aS'employee'
+p32
+aS'course'
+p33
+aS'document'
+p34
+aS'doctype'
+p35
+aS'session'
+p36
+aS'attendance'
+p37
+aS'certification'
+p38
+aS'certtype'
+p39
+aS'empcert'
+p40
+asS'page_document_manage'
+p41
+S'## Manage document\r\n{{=form}}'
+p42
+sS'page_session_manage'
+p43
+S'## Manage session\r\n{{=form}}'
+p44
+sS'page_certtype_manage'
+p45
+S'## Manage certtype\n{{=form}}'
+p46
+sS'page_certification_manage'
+p47
+S'## Manage certification\r\n{{=form}}'
+p48
+sS'table_certtype'
+p49
+(lp50
+S'name'
+p51
+asS'page_error'
+p52
+S'# Error: the document does not exist'
+p53
+sS'page_course_manage'
+p54
+S'## Manage course\r\n{{=form}}'
+p55
+sS'table_attendance'
+p56
+(lp57
+S'emp_id reference employee'
+p58
+aS'session_id reference session'
+p59
+asS'page_empcert_manage'
+p60
+S'## Manage empcert\r\n{{=form}}'
+p61
+sS'page_attendance_manage'
+p62
+S'## Manage attendance\r\n{{=form}}'
+p63
+sS'table_document'
+p64
+(lp65
+S'title string'
+p66
+aS'description text'
+p67
+aS'course_id reference course'
+p68
+aS'doctype_id reference doctype'
+p69
+asS'table_course'
+p70
+(lp71
+S'title string'
+p72
+aS'description text'
+p73
+asS'pages'
+p74
+(lp75
+S'index'
+p76
+aS'error'
+p77
+aS'employee_manage'
+p78
+aS'course_manage'
+p79
+aS'document_manage'
+p80
+aS'doctype_manage'
+p81
+aS'session_manage'
+p82
+aS'attendance_manage'
+p83
+aS'certification_manage'
+p84
+aS'empcert_manage'
+p85
+asS'name'
+p86
+S'emptraining'
+p87
+sS'table_doctype'
+p88
+(lp89
+S'name string'
+p90
+aS'description text'
+p91
+asS'page_employee_manage'
+p92
+S'## Manage employee\r\n{{=form}}'
+p93
+sS'page_index'
+p94
+S'Employee Training Database'
+p95
+sS'params'
+p96
+(lp97
+(S'title'
+p98
+S'My New App'
+p99
+tp100
+a(S'subtitle'
+p101
+S'powered by web2py'
+p102
+tp103
+a(S'author'
+p104
+S'you'
+p105
+tp106
+a(S'author_email'
+p107
+S'you@example.com'
+p108
+tp109
+a(S'keywords'
+p110
+S''
+p111
+tp112
+a(S'description'
+p113
+g111
+tp114
+a(S'layout_theme'
+p115
+S'Default'
+p116
+tp117
+a(S'database_uri'
+p118
+S'sqlite://storage.sqlite'
+p119
+tp120
+a(S'security_key'
+p121
+S'd4da7823-64a0-4d0d-9c96-c25d1969a350'
+p122
+tp123
+a(S'email_server'
+p124
+S'localhost'
+p125
+tp126
+a(S'email_sender'
+p127
+g108
+tp128
+a(S'email_login'
+p129
+g111
+tp130
+a(S'login_method'
+p131
+S'local'
+p132
+tp133
+a(S'login_config'
+p134
+g111
+tp135
+a(S'plugins'
+p136
+(lp137
+tp138
+as.
